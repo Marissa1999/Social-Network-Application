@@ -1,0 +1,115 @@
+﻿@model IEnumerable<SocialNetworkApplication.Models.Profile>
+
+@{
+    ViewBag.Title = "Index";
+    IEnumerable<SocialNetworkApplication.Models.FriendLink> theFollowers = ViewBag.theFollowers;
+    bool exists = false;
+}
+
+<h2>Welcome to the Social Network Application! </h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <p>
+                @Html.ActionLink("Modify Profile", "Edit", "Profile")
+            </p>
+        </th>
+        <th>
+            <p>
+                @Html.ActionLink("Change Password", "Edit", "Home")
+            </p>
+        </th>
+        <th>
+            <p>
+                @Html.ActionLink("View Picture Posts", "Index", "Picture")
+            </p>
+        </th>
+        <th>
+            <p>
+                @Html.ActionLink("View Address Information", "Index", "Address")
+            </p>
+        </th>
+        <th>
+            <p>
+                @Html.ActionLink("View Picture Like Notifications", "LikePictureIndex", "Picture")
+            </p>
+        </th>
+        <th>
+            <p>
+                @Html.ActionLink("View Comment Like Notifications", "LikeCommentIndex", "Comment")
+            </p>
+        </th>
+        <th>
+            <p>
+                @Html.ActionLink("View Comment Notifications", "CommentIndex", "Comment")
+            </p>
+        </th>
+        <th>
+            <p>
+                @Html.ActionLink("View Friend Requests", "FriendRequestIndex", "Profile")
+            </p>
+        </th>
+    </tr>
+</table>
+<table class="table">
+    <tr>
+        <th>
+            <form method="get" action="/Profile/Search">
+                <label> Search: </label> <input type="text" name="name" /> <input type="submit" name="search" value="Search" class="btn btn-default" />
+            </form>
+        </th>
+    </tr>
+</table>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Picture.path)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.first_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.last_name)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="/Images/@Html.DisplayFor(modelItem => item.Picture.path)" style="max-height:100px; max-width:100px">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.first_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_name)
+            </td>
+            <td>
+                @Html.ActionLink("View Profile", "Details", "Profile", new { id = item.profile_id }, null) |
+                @Html.ActionLink("Message User", "ViewMessages", "Profile", new { id = item.profile_id }, null) |
+
+                @foreach (var followItem in theFollowers)
+                {
+                    if (item.profile_id == followItem.requested)// || item.profile_id == followItem.requested)
+                    {
+                        exists = true;
+                    }
+                    else
+                    {
+                        exists = false;
+                    }
+                }
+
+                @if (exists == false)
+                {
+                    @Html.ActionLink("Follow User", "FollowUser", new { id = item.profile_id })
+                }
+                else
+                {
+                    @Html.ActionLink("Unfollow User", "UnFollowUser", new { id = item.profile_id })
+                }
+            </td>
+        </tr>
+    }
+</table>

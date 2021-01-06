@@ -1,0 +1,12 @@
+﻿@model SocialNetworkApplication.Models.Profile
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>
+    Comment Records
+</h3>
+
+@Html.Partial("AllCommentList", Model.Comments)
+@Html.ActionLink("Back to List", "Index", "Profile")

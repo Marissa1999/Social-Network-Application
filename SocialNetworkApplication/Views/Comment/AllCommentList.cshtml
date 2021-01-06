@@ -1,0 +1,56 @@
+﻿@model IEnumerable<SocialNetworkApplication.Models.Comment>
+
+@{
+    SocialNetworkApplication.Models.Comment theComments = ViewBag.theComments;
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.comment1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.timestamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.read)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Picture.caption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Picture.path)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profile.first_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.timestamp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.read)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Picture.caption)
+        </td>
+        <td>
+            <img src="/Images/@Html.DisplayFor(modelItem => item.Picture.path)" style="max-height:100px; max-width:100px">
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Profile.first_name)
+        </td>
+        <td>
+            @Html.ActionLink("Mark as Read", "CommentDetails", new { id = item.comment_id }, null)
+        </td>
+    </tr>
+}
+
+</table>

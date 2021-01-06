@@ -1,0 +1,12 @@
+﻿@model SocialNetworkApplication.Models.Profile
+
+@{
+    ViewBag.Title = "FriendRequestIndex";
+}
+
+<h3>
+    Friend Requests
+</h3>
+
+@Html.Partial("FriendRequestAlbum", Model.FriendLinks)
+@Html.ActionLink("Back to List", "Index", "Profile")

@@ -1,0 +1,12 @@
+﻿@model SocialNetworkApplication.Models.Profile
+
+@{
+    ViewBag.Title = "LikePictureIndex";
+}
+
+<h3>
+    Picture Likes
+</h3>
+
+@Html.Partial("LikePictureAlbum", Model.Likes)
+@Html.ActionLink("Back to List", "Index", "Profile")

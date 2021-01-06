@@ -1,0 +1,15 @@
+﻿@model SocialNetworkApplication.Models.Picture
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>
+    Comments
+</h3>
+
+<p>
+    @Html.ActionLink("Add New Comment", "Create")
+</p>
+
+@Html.Partial("CommentList", Model.Comments)

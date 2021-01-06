@@ -1,0 +1,18 @@
+﻿@model SocialNetworkApplication.Models.Profile
+
+@{
+    ViewBag.Title = "Index";
+    SocialNetworkApplication.Models.Profile theProfile = ViewBag.theProfile;
+}
+
+<h3>
+    @Html.DisplayFor(model => model.first_name)
+    @Html.DisplayFor(model => model.last_name)'s Picture Records
+</h3>
+
+<p>
+    @Html.ActionLink("Add New Picture", "Create")
+</p>
+
+@Html.Partial("PictureAlbum", Model.Pictures)
+@Html.ActionLink("Back to List", "Index", "Profile")

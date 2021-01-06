@@ -1,0 +1,77 @@
+﻿@model SocialNetworkApplication.Models.Profile
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Profile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.first_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.first_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.last_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.privacy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.privacy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture.path)
+        </dt>
+
+        <dd>
+            <img src="/Images/@Html.DisplayFor(modelItem => Model.Picture.path)" style="max-height:100px; max-width:100px">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.username)
+        </dd>
+
+    </dl>
+</div>
+
+@Html.Partial("AddressList", Model.Addresses)
+@Html.Partial("PictureAlbum", Model.Pictures)
+
+<p>
+    @Html.ActionLink("Back to List", "Index", "Profile", new { id = Model.profile_id })
+</p>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SocialNetworkApplication.Models.Comment>
+
+@{
+    IEnumerable<SocialNetworkApplication.Models.Comment_Like> theCommentLike = ViewBag.theCommentLike;
+    bool exists = false;
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.comment1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.timestamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.read)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Picture.caption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profile.first_name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.comment1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.timestamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.read)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Picture.caption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profile.first_name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.comment_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.comment_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.comment_id }) |
+
+
+                @{ 
+                    int profile_id = (int)Session["user_id"];
+                    bool likedByMe = item.Comment_Like.SingleOrDefault(l => l.profile_id == profile_id) != null;
+
+                }
+
+                
+                @if (!likedByMe)
+                {
+                    @Html.ActionLink("Like Comment", "LikeComment", new { id = item.comment_id }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Unlike Comment", "UnLikeComment", new { id = item.comment_id }, null)
+                }
+            </td>
+        </tr>
+    }
+
+</table>
